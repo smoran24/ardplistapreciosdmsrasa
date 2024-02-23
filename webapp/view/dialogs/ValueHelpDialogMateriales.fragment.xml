@@ -1,0 +1,6 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" id="Diag">
+	<SelectDialog id="valueHelpMateriales" title="Materiales" class="sapUiPopupWithPadding" liveChange="filtroMaterialesValueHelp" items="{/Filtros/Material/ValoresPosibles}"
+		confirm="handleValueHelpClose" cancel="handleValueHelpClose" multiSelect="true" showClearButton="true">
+		<StandardListItem selected="{selected}" title="{MATERIAL}" description="{DESCRIPCION}"/>
+	</SelectDialog>
+</core:FragmentDefinition>

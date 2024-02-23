@@ -1,0 +1,69 @@
+{
+  "welcomeFile": "/index.html",
+  "authenticationMethod": "route",
+  "routes": [
+    {
+        "source": "^/destinations/AR_DP_DEST_ODATA/(.*)$",
+        "target": "$1",
+        "authenticationType": "xsuaa",
+        "destination": "AR_DP_DEST_ODATA",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/destinations/AR_DP_REP_DEST_HANA/(.*)$",
+        "target": "$1",
+        "authenticationType": "xsuaa",
+        "destination": "AR_DP_REP_DEST_HANA",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/services/userapi(.*)",
+        "target": "$1",
+        "service": "sap-approuter-userapi"
+      },
+      {
+        "source": "^/destinations/IDP_Nissan/(.*)$",
+        "target": "$1",
+        "authenticationType": "xsuaa",
+        "destination": "IDP_Nissan",
+        "csrfProtection": false
+      },
+      {
+        "source": "^/destinations/AR_DP_DEST_CPI/(.*)$",
+        "target": "$1",
+        "authenticationType": "xsuaa",
+        "destination": "AR_DP_DEST_CPI",
+        "csrfProtection": false
+      },       
+    {
+      "source": "^/resources/(.*)$",
+      "target": "/resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/test-resources/(.*)$",
+      "target": "/test-resources/$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/webapp/index.html/(.*)$",
+      "target": "$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^/webapp/test-resources/(.*)$",
+      "target": "$1",
+      "authenticationType": "none",
+      "destination": "ui5"
+    },
+    {
+      "source": "^(.*)$",
+      "target": "$1",
+      "service": "html5-apps-repo-rt",
+      "authenticationType": "xsuaa"
+    }
+  ]
+}

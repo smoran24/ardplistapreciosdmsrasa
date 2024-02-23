@@ -1,0 +1,43 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:upload="sap.m.upload" xmlns:lf="sap.ui.layout.form">
+	<Dialog title="{i18n>SolicitudRevisionPrecio}" draggable="true">
+		<lf:SimpleForm width="500px" editable="true" layout="ResponsiveGridLayout" labelSpanXL="4" labelSpanL="4" labelSpanM="4" labelSpanS="4"
+			adjustLabelSpan="false" emptySpanXL="0" emptySpanL="0" emptySpanM="0" emptySpanS="0" columnsXL="2" columnsL="2" columnsM="2"
+			singleContainerFullSize="true">
+			<lf:content>
+				<Label text="{i18n>Material}"/>
+				<Input type="Text" placeholder="Material" value="{/Solicitud/Material}" editable="false"/>
+				<Label text="{i18n>Descripcion}"/>
+				<Input id="descripcion" value="{/Solicitud/Descripcion}" editable="false"/>
+				<Label text="{i18n>PNC}"/>
+				<Input value="{/Solicitud/PrecioDealer}" editable="false" description="{/Solicitud/MonedaDealer}"/>
+				<Label text="{i18n>PrecioCliente}"/>
+				<Input value="{/Solicitud/PrecioSugerido}" editable="false" description="{/Solicitud/MonedaSugerido}"/>
+				<Label text="{i18n>Marca}"/>
+				<Input id="marca" value="{/Solicitud/Marca}"/>
+				<Label text="{i18n>PrecioMarca}" required="true"/>
+				<HBox>
+					<Input value="{/Solicitud/PrecioMarca}" required="true" type="Number"/>
+					<ComboBox required="true" value="{/Solicitud/MonedaMarca}" width="40%" class="sapUiTinyMarginBegin">
+						<items>
+							<core:Item key="ARS" text="ARS"/>
+							<core:Item key="USD" text="USD"/>
+						</items>
+					</ComboBox>
+				</HBox>
+				<Label text="{i18n>Fuente}"/>
+				<TextArea id="fuente" value="{/Solicitud/Fuente}" required="true" maxLength="200" growingMaxLines="1"/>
+				<Label text="{i18n>Comentario}"/>
+				<TextArea id="comentario" value="{/Solicitud/Comentario}" maxLength="500"/>
+				<Label text="{i18n>Adjuntos}"/>
+				<upload:UploadSet id="UploadSet" multiple="true" instantUpload="true" showIcons="true" uploadEnabled="true" terminationEnabled="true"
+					fileTypes="pdf,jpg,jpeg,png" maxFileNameLength="30" maxFileSize="200" uploadUrl="upload/" afterItemAdded="onAdjuntoAgregado"
+					afterItemRemoved="onAdjuntoRemovido"></upload:UploadSet>
+			</lf:content>
+		</lf:SimpleForm>
+		<buttons>
+			<Button text="{i18n>Cerrar}" type="Reject" press="closeSolicitudDialog"/>
+			<Button text="{i18n>Enviar}" type="Accept" press="sendSolicitud" icon="sap-icon://paper-plane"
+				enabled="{= ${/campoMaterial} &amp;&amp; ${/campoMarca} &amp;&amp; ${/campoSugerido} &amp;&amp; ${/campoFuente} &amp;&amp; ${/campoComentario} === true}"/>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>

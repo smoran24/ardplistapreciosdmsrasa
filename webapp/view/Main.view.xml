@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<!DOCTYPE mvc:View>
+<mvc:View controllerName="ardplistapreciosdmsrasa.controller.Main" xmlns:mvc="sap.ui.core.mvc" xmlns:t="sap.ui.table"
+	displayBlock="true" xmlns="sap.m" xmlns:core="sap.ui.core">
+	<Shell id="shell">
+		<App id="app">
+			<pages>
+				<Page id="page" title="{i18n>title}">
+					<content>
+						<Panel>
+							<VBox>
+								<HBox>
+									<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="16%" justifyContent="Start" displayInline="false">
+										<items>
+											<Label wrapping="true" text="{i18n>Material}" width="100%" textAlign="Begin" textDirection="Inherit"/>
+											<MultiInput id="material" type="Text" placeholder="Material" showValueHelp="true" valueHelpOnly="true" valueHelpRequest="handleMaterialesValueHelp" 
+											liveChange="mayuscula" value="{/Filtros/Material/Texto}">
+											</MultiInput>
+										</items>
+									</VBox>
+									<HBox width="3%"/>
+									<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="16%" justifyContent="Start" displayInline="false">
+										<items>
+											<Label wrapping="true" text="{i18n>Vigencia}" width="100%" textAlign="Begin" textDirection="Inherit"/>
+											<DatePicker id="DateSelector" displayFormat="dd/MM/yyyy" textAlign="Begin" dateValue="{/Filtros/Validez}"/>
+										</items>
+									</VBox>
+									<HBox width="3%"/>
+									<VBox alignItems="Stretch" direction="Column" fitContainer="false" width="16%" justifyContent="Start" displayInline="false">
+										<items>
+											<Label text="" width="100%" wrapping="true" textAlign="Begin" textDirection="Inherit"/>
+											<Button text="{i18n>Consultar}" icon="sap-icon://search" width="100%" press="cargarContenidoTabla"/>
+										</items>
+									</VBox>
+								</HBox>
+							</VBox>
+						</Panel>
+						<Table items="{path:'/ContenidoTabla'}">
+							<headerToolbar>
+								<OverflowToolbar>
+									<content>
+										<ToolbarSpacer/>
+										<Button text="{i18n>Exportar}" icon="sap-icon://excel-attachment" press="descargarContenidoTabla"/>
+									</content>
+								</OverflowToolbar>
+							</headerToolbar>
+							<columns>
+								<Column>
+									<Text text="{i18n>Material}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>Descripcion}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>PrecioDealer}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>PrecioCliente}"/>
+								</Column>
+								<Column>
+									<Text text="{i18n>Margen}"/>
+								</Column>
+								<Column width="10%">
+									<Text text=""/>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{MATERIAL}"/>
+										<Text text="{DESCRIPCION}"/>
+										<Text text="{PRECIO_DEALER} {MONEDA_DEALER}"/>
+										<Text text="{PRECIO_SUGERIDO} {MONEDA_SUGERIDO}"/>
+										<Text text="{MARGEN}%"/>
+										<Button icon="sap-icon://BusinessSuiteInAppSymbols/icon-paid-search" tooltip="Crear solicitud de revision de precio" 
+										press="handleDialogSolicitudRevisionPrecio" enabled="{/RevisionPrecioHabilitada}"/>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</content>
+					<footer>
+						<Toolbar>
+							<ToolbarSpacer/>
+							<Button text="{i18n>DescargarListaCompleta}" type="Default" press="handleDescargarListaCompleta" icon="sap-icon://download"/>
+						</Toolbar>
+					</footer>
+				</Page>
+			</pages>
+		</App>
+	</Shell>
+</mvc:View>

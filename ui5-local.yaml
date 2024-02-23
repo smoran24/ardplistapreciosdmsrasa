@@ -1,0 +1,50 @@
+specVersion: '2.0'
+metadata:
+  name: 'ardplistapreciosdmsrasa'
+type: application
+framework:
+  name: SAPUI5
+  version: '1.89.0'
+  libraries: 
+    - name: sap.f
+    - name: sap.suite.ui.microchart
+    - name: sap.m
+    - name: sap.suite.ui.generic.template
+    - name: sap.ui.comp
+    - name: sap.ui.core
+    - name: sap.ui.generic.app
+    - name: sap.ui.table
+    - name: sap.ushell
+    - name: themelib_sap_fiori_3
+server:
+  customMiddleware:
+  - name: fiori-tools-proxy
+    afterMiddleware: compression
+    configuration:
+      ignoreCertError: false # If set to true, certificate errors will be ignored. E.g. self-signed certificates will be accepted
+      backend:
+        - path: /destinations/AR_DP_DEST_ODATA
+          pathPrefix: /
+          url: https://nissanargcf.us10.services.xfs.cloud.sap/
+          destination: AR_DP_DEST_ODATA
+
+        - path: /destinations/AR_DP_REP_DEST_HANA
+          pathPrefix: /
+          url: https://nissan-cfdatabases-databases-nissan-prd-xsjs-service.cfapps.us10.hana.ondemand.com/AR_DP_REP_PACKAGE_PRD/services/
+          destination: AR_DP_REP_DEST_HANA
+
+        - path: /destinations/IDP_Nissan/service/scim/Users/P001199
+          url: http://localhost:4004
+
+        - path: /destinations/AR_DP_DEST_CPI
+          pathPrefix: /
+          url: https://nissanchlcf.it-cpi019-rt.cfapps.us10-002.hana.ondemand.com/
+          destination: AR_DP_DEST_CPI
+          
+        - path: /services/userapi/currentUser
+          url: http://localhost:4004
+  - name: fiori-tools-appreload
+    afterMiddleware: compression
+    configuration:
+     port: 35729
+     path: webapp
